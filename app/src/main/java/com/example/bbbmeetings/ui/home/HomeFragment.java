@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.bbbmeetings.App;
 import com.example.bbbmeetings.R;
 import com.example.bbbmeetings.data.dto.Create;
+import com.example.bbbmeetings.data.dto.Join;
 import com.example.bbbmeetings.databinding.FragmentHomeBinding;
 
 import java.util.UUID;
@@ -34,7 +35,6 @@ public class HomeFragment extends Fragment {
     private static final String welcomeS = "<br>Welcome+to+<b>%%CONFNAME%%</b>!";
     private static final String TAG = "HomeFragment: ";
     private String meetindId;
-    private String name;
 
     private FragmentHomeBinding binding;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -81,8 +81,10 @@ public class HomeFragment extends Fragment {
                     addButton.setText("Recreate meeting");
                     Button joinButton = binding.joinButton;
                     TextView infotext = binding.infoText;
+                    EditText nameConf = binding.nameConf;
+                    nameConf.setText("");
                     infotext.setText("Success!");
-
+                    joinMeeting(meetindId,"moderator");
                     joinButton.setEnabled(true);
                 } else {
                     TextView infoText = binding.infoText ;
@@ -95,12 +97,38 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-    private void joinMeeting(){
-        String urlJoin = "";
-        Intent httpIntent = new Intent();
-        httpIntent.setAction(Intent.ACTION_VIEW);
-        httpIntent.setData(Uri.parse(urlJoin));
-        startActivity(httpIntent);
+    private void joinMeeting(String meetindId,String role){
+        String password;
+        if (role == "moderator") {
+            password = moderatorPW;
+        }else{
+            password = attendeePW;
+        }
+        App.api.joinMeeting("John Wick",meetindId,password, false).enqueue(new Callback<Join>() {
+            @Override
+            public void onResponse(Call<Join> call, Response<Join> response) {
+                if (response.code() == 200) {
+                    TextView infotext = binding.infoText;
+                    infotext.setText("Success!");
+                    Button joinButton = binding.joinButton;
+                    joinButton.setOnClickListener(v2 -> {
+                        Intent view = new Intent();
+                        view.setAction(Intent.ACTION_VIEW);
+                        view.setData(Uri.parse(response.body().getUrl()));
+                        startActivity(view);
+                    });
+                    Log.d(TAG, "onResponse: Success!!!");
+                } else {
+                    TextView infoText = binding.infoText ;
+                    infoText.setText("Error:"+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Join> call, Throwable t) {
+                Log.d(TAG, "onFailure Join method:"+ t.getMessage());
+            }
+        });
     }
 
     @Override

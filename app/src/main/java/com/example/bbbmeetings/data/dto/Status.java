@@ -1,7 +1,9 @@
 package com.example.bbbmeetings.data.dto;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
+@Root(name = "response")
 public class Status {
     @Element(name = "returncode")
     private String returncode;
