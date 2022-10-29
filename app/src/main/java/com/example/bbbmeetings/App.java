@@ -17,8 +17,8 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class App extends Application {
     public static bbbApi api;
-    private final String BASE_URL = "https://itcube54.ru/bigbluebutton/api/";
-    private final String API_KEY = "DoH3ei9hlmMzwS1jCXDxgp1NhV6jUjHLz5NELaDIw";
+    private final String BASE_URL = "https://test-install.blindsidenetworks.com/bigbluebutton/api";
+    private final String API_KEY = "8cd8ef52e8e101574e400365b55e11a6";
     @Override
     public void onCreate() {
         super.onCreate();

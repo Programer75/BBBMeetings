@@ -1,6 +1,7 @@
 package com.example.bbbmeetings.net;
 
 import com.example.bbbmeetings.data.dto.Create;
+import com.example.bbbmeetings.data.dto.End;
 import com.example.bbbmeetings.data.dto.Join;
 import com.example.bbbmeetings.data.dto.Status;
 
@@ -30,5 +31,10 @@ public interface bbbApi {
             @Query("meetingID") String meetingID,
             @Query("password") String password,
             @Query("redirect") boolean redirect
+    );
+    @GET("end")
+    Call<End> endMeeting(
+            @Query("meetingID") String meetingID,
+            @Query("password") String password
     );
 }

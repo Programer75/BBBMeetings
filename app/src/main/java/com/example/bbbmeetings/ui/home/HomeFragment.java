@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.bbbmeetings.App;
 import com.example.bbbmeetings.R;
 import com.example.bbbmeetings.data.dto.Create;
+import com.example.bbbmeetings.data.dto.End;
 import com.example.bbbmeetings.data.dto.Join;
 import com.example.bbbmeetings.databinding.FragmentHomeBinding;
 
@@ -67,11 +68,10 @@ public class HomeFragment extends Fragment {
         addButton.setOnClickListener(v1 -> createMeetingFast(nameConf.getText().toString()));
         return root;
     }
-    private void createMeetingFast(String name){
 
+    private void createMeetingFast(String name){
         String uuid = UUID.randomUUID().toString();
         meetindId = uuid;
-//        meetindId = "random-9711938";
         App.api.createMeeting(true,attendeePW, false,meetindId,
                 moderatorPW,name, false, 78980,welcomeS).enqueue(new Callback<Create>(){
             @Override
@@ -97,6 +97,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     private void joinMeeting(String meetindId,String role){
         String password;
         if (role == "moderator") {
@@ -127,6 +128,26 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<Join> call, Throwable t) {
                 Log.d(TAG, "onFailure Join method:"+ t.getMessage());
+            }
+        });
+    }
+    private void endMeeting(String meetingId){
+        TextView infotext = binding.infoText;
+        App.api.endMeeting(meetingId, moderatorPW).enqueue(new Callback<End>() {
+            @Override
+            public void onResponse(Call<End> call, Response<End> response) {
+
+                if (response.code() == 200){
+                    infotext.setText("Successfully ended meeting");
+                }else{
+                    infotext.setText("Error:" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<End> call, Throwable t) {
+                infotext.setText("Error while ending:" + t.getMessage());
+                Log.d(TAG, "onFailure End Meeting: "+ t.getMessage());
             }
         });
     }
