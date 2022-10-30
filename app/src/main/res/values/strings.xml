@@ -18,6 +18,8 @@
     <string name="btn1Text">Create meeting</string>
     <string name="btn2Text">Join meeting</string>
     <string name="inputText">Type meeting name...</string>
+    <string name="creator">Creator: Programer75</string>
+    <string name="github">App-Github: github.com/Programer75/BBBMeetings</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Preference Titles -->

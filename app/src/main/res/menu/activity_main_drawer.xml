@@ -9,11 +9,11 @@
             android:icon="@android:drawable/presence_video_online"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_history"
             android:icon="@android:drawable/ic_btn_speak_now"
             android:title="@string/menu_gallery" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_account"
             android:icon="@mipmap/person"
             android:title="@string/menu_slideshow" />
         <item

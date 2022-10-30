@@ -20,6 +20,36 @@
             android:text="@string/AboutH1"
             android:textColor="@color/black"
             android:textSize="36dp"/>
-        tool
+        <ImageView
+            android:layout_width="361dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/bbblogo"/>
+        <TextView
+            android:layout_gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"
+            android:text="@string/creator"
+            android:textSize="25dp"
+            />
+        <TextView
+            android:layout_gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"
+            android:text="@string/github"
+            android:textSize="25dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:text="Version: 1.0 beta"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
